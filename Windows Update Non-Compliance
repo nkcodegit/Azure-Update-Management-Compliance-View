@@ -1,0 +1,6 @@
+Update 
+| where TimeGenerated > ago(1d) 
+| where Computer contains "<computername>" 
+| where Approved != false and UpdateState != "Installed" 
+| summarize dcount(KBID) by Computer 
+| project Computer 
