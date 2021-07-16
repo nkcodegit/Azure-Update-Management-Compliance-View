@@ -1,0 +1,11 @@
+let NON = Update 
+| where TimeGenerated > ago(1d) 
+| where Computer contains "<computername>"
+| where Approved != false and UpdateState != "Installed" 
+| summarize dcount(KBID) by Computer 
+| project Computer ; Update 
+| where TimeGenerated > ago(1d) 
+| where Computer contains "<computername>" 
+| where Computer !in (NON) 
+| summarize dcount(KBID) by Computer 
+| project Computer 
